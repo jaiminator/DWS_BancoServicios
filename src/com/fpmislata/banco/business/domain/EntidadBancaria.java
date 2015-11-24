@@ -3,10 +3,6 @@ package com.fpmislata.banco.business.domain;
 
 import java.util.Date;
 
-/**
- *
- * @author alumno
- */
 public class EntidadBancaria {
     private int idEntidadBancaria;
     private String nombre;

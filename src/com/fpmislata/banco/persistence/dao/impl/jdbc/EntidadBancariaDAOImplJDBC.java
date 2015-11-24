@@ -4,6 +4,7 @@ package com.fpmislata.banco.persistence.dao.impl.jdbc;
 import com.fpmislata.banco.persistence.jdbc.ConnectionFactory;
 import com.fpmislata.banco.business.domain.EntidadBancaria;
 import com.fpmislata.banco.persistence.dao.EntidadBancariaDAO;
+import com.fpmislata.banco.persistence.jdbc.impl.ConnectionFactoryImplDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
 
-    @Autowired
-    ConnectionFactory connectionFactory;
+    ConnectionFactory connectionFactory = new ConnectionFactoryImplDataSource();
 
     @Override
     public EntidadBancaria get(int id) {
@@ -30,17 +30,17 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             preparedStatement = connection.prepareStatement(selectEntidad);
             preparedStatement.setInt(1, id);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             EntidadBancaria entidadBancaria = new EntidadBancaria();
 
-            if (rs.next()) {
+            if (resultSet.next()) {
 
-                entidadBancaria.setIdEntidadBancaria(rs.getInt("idEntidadBancaria"));
-                entidadBancaria.setNombre(rs.getString("nombre"));
-                entidadBancaria.setCodigoEntidad(rs.getString("codigoEntidad"));
-                entidadBancaria.setFechaCreacion(rs.getDate("fechaCreacion"));
-                entidadBancaria.setDireccion(rs.getString("direccion"));
-                entidadBancaria.setCif(rs.getString("cif"));
+                entidadBancaria.setIdEntidadBancaria(resultSet.getInt("idEntidadBancaria"));
+                entidadBancaria.setNombre(resultSet.getString("nombre"));
+                entidadBancaria.setCodigoEntidad(resultSet.getString("codigoEntidad"));
+                entidadBancaria.setFechaCreacion(resultSet.getDate("fechaCreacion"));
+                entidadBancaria.setDireccion(resultSet.getString("direccion"));
+                entidadBancaria.setCif(resultSet.getString("cif"));
 
             } else {
                 entidadBancaria = null;
@@ -90,6 +90,9 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
     @Override
     public EntidadBancaria update(EntidadBancaria entidadBancaria) {
         try {
+            java.util.Date utilDate = new java.util.Date();
+            java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+            
             Connection connection = connectionFactory.getConnection();
 
             PreparedStatement preparedStatement;
@@ -102,7 +105,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             preparedStatement = connection.prepareStatement(updateEntidad);
             preparedStatement.setString(1, entidadBancaria.getNombre());
             preparedStatement.setString(2, entidadBancaria.getCodigoEntidad());
-            preparedStatement.setTimestamp(3, getCurrentTimeStamp());
+            preparedStatement.setDate(3, sqlDate);
             preparedStatement.setString(4, entidadBancaria.getDireccion());
             preparedStatement.setString(5, entidadBancaria.getCif());
             preparedStatement.setInt(6, entidadBancaria.getIdEntidadBancaria());
@@ -159,18 +162,18 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             List<EntidadBancaria> entidadesBancarias = new ArrayList<>();
             preparedStatement = connection.prepareStatement(selectAllEntidad);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (rs.next()) {
+            if (resultSet.next()) {
 
                 EntidadBancaria entidadBancaria = new EntidadBancaria();
 
-                entidadBancaria.setIdEntidadBancaria(rs.getInt("idEntidadBancaria"));
-                entidadBancaria.setNombre(rs.getString("nombre"));
-                entidadBancaria.setCodigoEntidad(rs.getString("codigoEntidad"));
-                entidadBancaria.setFechaCreacion(rs.getTimestamp("fechaCreacion"));
-                entidadBancaria.setDireccion(rs.getString("direccion"));
-                entidadBancaria.setCif(rs.getString("cif"));
+                entidadBancaria.setIdEntidadBancaria(resultSet.getInt("idEntidadBancaria"));
+                entidadBancaria.setNombre(resultSet.getString("nombre"));
+                entidadBancaria.setCodigoEntidad(resultSet.getString("codigoEntidad"));
+                entidadBancaria.setFechaCreacion(resultSet.getDate("fechaCreacion"));
+                entidadBancaria.setDireccion(resultSet.getString("direccion"));
+                entidadBancaria.setCif(resultSet.getString("cif"));
 
                 entidadesBancarias.add(entidadBancaria);
 
@@ -196,18 +199,18 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             preparedStatement = connection.prepareStatement(selectEntidad);
             preparedStatement.setString(1, nombre);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (rs.next()) {
+            if (resultSet.next()) {
 
                 EntidadBancaria entidadBancaria = new EntidadBancaria();
 
-                entidadBancaria.setIdEntidadBancaria(rs.getInt("idEntidadBancaria"));
-                entidadBancaria.setNombre(rs.getString("nombre"));
-                entidadBancaria.setCodigoEntidad(rs.getString("codigoEntidad"));
-                entidadBancaria.setFechaCreacion(rs.getTimestamp("fechaCreacion"));
-                entidadBancaria.setDireccion(rs.getString("direccion"));
-                entidadBancaria.setCif(rs.getString("cif"));
+                entidadBancaria.setIdEntidadBancaria(resultSet.getInt("idEntidadBancaria"));
+                entidadBancaria.setNombre(resultSet.getString("nombre"));
+                entidadBancaria.setCodigoEntidad(resultSet.getString("codigoEntidad"));
+                entidadBancaria.setFechaCreacion(resultSet.getDate("fechaCreacion"));
+                entidadBancaria.setDireccion(resultSet.getString("direccion"));
+                entidadBancaria.setCif(resultSet.getString("cif"));
 
                 entidadesBancarias.add(entidadBancaria);
 

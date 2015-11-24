@@ -23,8 +23,8 @@ public class EntidadBancariaServiceImpl implements EntidadBancariaService {
     }
 
     @Override
-    public EntidadBancaria get(int id) {
-        return entidadBancariaDAO.get(id);
+    public EntidadBancaria get(int idEntidadBancaria) {
+        return entidadBancariaDAO.get(idEntidadBancaria);
     }
 
     @Override

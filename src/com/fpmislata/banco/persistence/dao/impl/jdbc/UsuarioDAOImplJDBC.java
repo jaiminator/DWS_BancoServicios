@@ -33,15 +33,15 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
             preparedStatement = connection.prepareStatement(selectUsuario);
             preparedStatement.setString(1, nombreUsuario);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (rs.next()) {
+            while (resultSet.next()) {
 
                 Usuario usuario = new Usuario();
 
-                usuario.setIdUsuario(rs.getInt("idUsuario"));
-                usuario.setNombreUsuario(rs.getString("nombreUsuario"));
-                usuario.setClave(rs.getString("clave"));
+                usuario.setIdUsuario(resultSet.getInt("idUsuario"));
+                usuario.setNombreUsuario(resultSet.getString("nombreUsuario"));
+                usuario.setClave(resultSet.getString("clave"));
 
                 usuarios.add(usuario);
 
@@ -62,14 +62,14 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
             preparedStatement = connection.prepareStatement(selectUsuario);
             preparedStatement.setInt(1, id);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             Usuario usuario = new Usuario();
 
-            if (rs.next()) {
+            if (resultSet.next()) {
 
-                usuario.setIdUsuario(rs.getInt("idUsuario"));
-                usuario.setNombreUsuario(rs.getString("nombreUsuario"));
-                usuario.setClave(rs.getString("clave"));
+                usuario.setIdUsuario(resultSet.getInt("idUsuario"));
+                usuario.setNombreUsuario(resultSet.getString("nombreUsuario"));
+                usuario.setClave(resultSet.getString("clave"));
 
             }
 
@@ -180,15 +180,15 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
             List<Usuario> usuarios = new ArrayList<>();
             preparedStatement = connection.prepareStatement(selectAllUsuario);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (rs.next()) {
+            while (resultSet.next()) {
 
                 Usuario usuario = new Usuario();
 
-                usuario.setIdUsuario(rs.getInt("idUsuario"));
-                usuario.setNombreUsuario(rs.getString("nombreUsuario"));
-                usuario.setClave(rs.getString("clave"));
+                usuario.setIdUsuario(resultSet.getInt("idUsuario"));
+                usuario.setNombreUsuario(resultSet.getString("nombreUsuario"));
+                usuario.setClave(resultSet.getString("clave"));
 
                 usuarios.add(usuario);
 

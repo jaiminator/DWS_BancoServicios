@@ -28,17 +28,17 @@ public class SucursalBancariaDAOImplJDBC implements SucursalBancariaDAO {
             preparedStatement = connection.prepareStatement(selectSucursal);
             preparedStatement.setInt(1, id);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             SucursalBancaria sucursalBancaria = new SucursalBancaria();
 
-            if (rs.next()) {
+            if (resultSet.next()) {
 
-                sucursalBancaria.setIdSucursalBancaria(rs.getInt("idSucursalBancaria"));
-                sucursalBancaria.setNombreSucursal(rs.getString("nombreSucursal"));
-                sucursalBancaria.setDireccion(rs.getString("direccion"));
-                sucursalBancaria.setDirector(rs.getString("director"));
-                sucursalBancaria.setTelefono(rs.getString("telefono"));
-                sucursalBancaria.setFechaApertura(rs.getDate("fechaApertura"));
+                sucursalBancaria.setIdSucursalBancaria(resultSet.getInt("idSucursalBancaria"));
+                sucursalBancaria.setNombreSucursal(resultSet.getString("nombreSucursal"));
+                sucursalBancaria.setDireccion(resultSet.getString("direccion"));
+                sucursalBancaria.setDirector(resultSet.getString("director"));
+                sucursalBancaria.setTelefono(resultSet.getString("telefono"));
+                sucursalBancaria.setFechaApertura(resultSet.getDate("fechaApertura"));
 
             }
 
