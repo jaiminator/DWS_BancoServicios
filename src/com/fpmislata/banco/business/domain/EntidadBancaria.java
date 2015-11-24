@@ -1,0 +1,80 @@
+
+package com.fpmislata.banco.business.domain;
+
+import java.util.Date;
+
+/**
+ *
+ * @author alumno
+ */
+public class EntidadBancaria {
+    private int idEntidadBancaria;
+    private String nombre;
+    private String codigoEntidad;
+    private Date fechaCreacion;
+    private String direccion;
+    private String cif;
+    
+    public EntidadBancaria() {
+        
+    }
+
+    public EntidadBancaria(int idEntidadBancaria, String nombre, String codigoEntidad, Date fechaCreacion, String direccion, String cif) {
+        this.idEntidadBancaria = idEntidadBancaria;
+        this.nombre = nombre;
+        this.codigoEntidad = codigoEntidad;
+        this.fechaCreacion = fechaCreacion;
+        this.direccion = direccion;
+        this.cif = cif;
+    }
+
+    public int getIdEntidadBancaria() {
+        return idEntidadBancaria;
+    }
+
+    public void setIdEntidadBancaria(int idEntidadBancaria) {
+        this.idEntidadBancaria = idEntidadBancaria;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCodigoEntidad() {
+        return codigoEntidad;
+    }
+
+    public void setCodigoEntidad(String codigoEntidad) {
+        this.codigoEntidad = codigoEntidad;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getCif() {
+        return cif;
+    }
+
+    public void setCif(String cif) {
+        this.cif = cif;
+    }
+    
+    
+}
