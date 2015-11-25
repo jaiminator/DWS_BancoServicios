@@ -1,7 +1,6 @@
 
 package com.fpmislata.banco.persistence.dao.impl.jdbc;
 
-import com.fpmislata.banco.persistence.jdbc.impl.ConnectionFactoryImplDriverManager;
 import com.fpmislata.banco.persistence.jdbc.ConnectionFactory;
 import com.fpmislata.banco.business.domain.Usuario;
 import com.fpmislata.banco.persistence.dao.UsuarioDAO;
@@ -10,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -17,8 +17,9 @@ import java.util.List;
  */
 public class UsuarioDAOImplJDBC implements UsuarioDAO {
     
-    ConnectionFactory connectionFactory = new ConnectionFactoryImplDriverManager();
-
+    @Autowired
+    ConnectionFactory connectionFactory;
+    
     @Override
     public List<Usuario> findByName(String nombreUsuario) {
         try {

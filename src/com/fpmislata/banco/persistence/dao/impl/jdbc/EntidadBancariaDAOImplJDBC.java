@@ -4,7 +4,6 @@ package com.fpmislata.banco.persistence.dao.impl.jdbc;
 import com.fpmislata.banco.persistence.jdbc.ConnectionFactory;
 import com.fpmislata.banco.business.domain.EntidadBancaria;
 import com.fpmislata.banco.persistence.dao.EntidadBancariaDAO;
-import com.fpmislata.banco.persistence.jdbc.impl.ConnectionFactoryImplDataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author alumno
  */
 public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
-
-    ConnectionFactory connectionFactory = new ConnectionFactoryImplDataSource();
+    
+    @Autowired
+    ConnectionFactory connectionFactory;
 
     @Override
     public EntidadBancaria get(int id) {
@@ -181,7 +181,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             connectionFactory.closeConnection(connection);
             return entidadesBancarias;
         } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            throw new RuntimeException(ex.getMessage());
         }
     }
 
