@@ -164,7 +164,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (resultSet.next()) {
+            while (resultSet.next()) {
 
                 EntidadBancaria entidadBancaria = new EntidadBancaria();
 
