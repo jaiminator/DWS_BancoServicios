@@ -3,10 +3,13 @@ package com.fpmislata.banco.persistence.dao.impl.jdbc;
 
 import com.fpmislata.banco.persistence.jdbc.ConnectionFactory;
 import com.fpmislata.banco.business.domain.EntidadBancaria;
+import com.fpmislata.banco.core.BussinessException;
+import com.fpmislata.banco.core.BussinessMessage;
 import com.fpmislata.banco.persistence.dao.EntidadBancariaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +58,7 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
     }
 
     @Override
-    public EntidadBancaria insert(EntidadBancaria entidadBancaria) {
+    public EntidadBancaria insert(EntidadBancaria entidadBancaria) throws BussinessException {
         try {
 
             java.util.Date utilDate = new java.util.Date();
@@ -81,14 +84,22 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             System.out.println("Has insertado fila nueva de banco");
 
             connectionFactory.closeConnection(connection);
-            return entidadBancaria;
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
+            
+            
+        } catch (SQLException ex) {
+            entidadBancaria = null;
+            if (ex.getErrorCode() == 1062 && ex.getSQLState().equals("23000")) {
+                throw new BussinessException("Codigo Entidad", "Ya existe.");
+            } else {
+                throw new RuntimeException(ex);
+            }
+                
         }
+        return entidadBancaria;
     }
 
     @Override
-    public EntidadBancaria update(EntidadBancaria entidadBancaria) {
+    public EntidadBancaria update(EntidadBancaria entidadBancaria) throws BussinessException {
         try {
             java.util.Date utilDate = new java.util.Date();
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
@@ -114,11 +125,20 @@ public class EntidadBancariaDAOImplJDBC implements EntidadBancariaDAO {
             System.out.println("Has modificado el registro correspondiente");
 
             connectionFactory.closeConnection(connection);
-            return entidadBancaria;
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
+            
+        } catch (SQLException ex) {
+            if (ex.getErrorCode() == 1062 && ex.getSQLState().equals("23000")) {
+                List<BussinessMessage> businessMessages = new ArrayList<>();
+                BussinessMessage businessMessage = new BussinessMessage("CodigoEntidad: ", "Ya existe.");
+                businessMessages.add(businessMessage);
 
+                throw new BussinessException(businessMessages);
+                
+            } else {
+                throw new RuntimeException(ex);
+            }
+        }
+        return entidadBancaria;
     }
 
     @Override

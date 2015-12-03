@@ -3,6 +3,7 @@ package com.fpmislata.banco.business.service.impl;
 
 import com.fpmislata.banco.business.domain.SucursalBancaria;
 import com.fpmislata.banco.business.service.SucursalBancariaService;
+import com.fpmislata.banco.core.BussinessException;
 import com.fpmislata.banco.persistence.dao.SucursalBancariaDAO;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,27 +24,27 @@ public class SucursalBancariaServiceImpl implements SucursalBancariaService {
     }
 
     @Override
-    public SucursalBancaria get(int id) {
+    public SucursalBancaria get(int id) throws BussinessException {
         return sucursalBancariaDAO.get(id);
     }
 
     @Override
-    public SucursalBancaria insert(SucursalBancaria sucursalBancaria) {
+    public SucursalBancaria insert(SucursalBancaria sucursalBancaria) throws BussinessException {
         return sucursalBancariaDAO.insert(sucursalBancaria);
     }
 
     @Override
-    public SucursalBancaria update(SucursalBancaria sucursalBancaria) {
+    public SucursalBancaria update(SucursalBancaria sucursalBancaria) throws BussinessException {
         return sucursalBancariaDAO.update(sucursalBancaria);
     }
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int id) throws BussinessException {
         return sucursalBancariaDAO.delete(id);
     }
 
     @Override
-    public List<SucursalBancaria> findAll() {
+    public List<SucursalBancaria> findAll() throws BussinessException {
         return sucursalBancariaDAO.findAll();
     }
     

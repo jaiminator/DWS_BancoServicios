@@ -7,6 +7,7 @@ package com.fpmislata.banco.presentation;
 
 import com.fpmislata.banco.business.domain.EntidadBancaria;
 import com.fpmislata.banco.business.domain.SucursalBancaria;
+import com.fpmislata.banco.core.BussinessException;
 import com.fpmislata.banco.persistence.dao.EntidadBancariaDAO;
 import com.fpmislata.banco.persistence.dao.SucursalBancariaDAO;
 import com.fpmislata.banco.persistence.dao.impl.jdbc.EntidadBancariaDAOImplJDBC;
@@ -28,7 +29,7 @@ public class BancoService {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException, BussinessException {
         
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 
