@@ -18,8 +18,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     UsuarioDAO usuarioDAO;
 
     @Override
-    public List<Usuario> findByName(String nombreUsuario) {
-        return usuarioDAO.findByName(nombreUsuario);
+    public List<Usuario> findByName(String nombre) {
+        return usuarioDAO.findByName(nombre);
     }
 
     @Override

@@ -9,5 +9,5 @@ import java.util.List;
  * @author alumno
  */
 public interface UsuarioService extends GenericService<Usuario> {
-    List<Usuario> findByName(String nombreUsuario);
+    List<Usuario> findByName(String nombre);
 }

@@ -21,18 +21,18 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
     ConnectionFactory connectionFactory;
     
     @Override
-    public List<Usuario> findByName(String nombreUsuario) {
+    public List<Usuario> findByName(String nombre) {
         try {
             Connection connection = connectionFactory.getConnection();
 
             PreparedStatement preparedStatement;
 
-            String selectUsuario = "SELECT idUsuario, nombreUsuario, clave FROM usuario WHERE nombreUsuario = ?";
+            String selectUsuario = "SELECT idUsuario, nombre, encryptedPassword FROM usuario WHERE nombre = ?";
 
             List<Usuario> usuarios = new ArrayList<>();
 
             preparedStatement = connection.prepareStatement(selectUsuario);
-            preparedStatement.setString(1, nombreUsuario);
+            preparedStatement.setString(1, nombre);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -41,8 +41,8 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
                 Usuario usuario = new Usuario();
 
                 usuario.setIdUsuario(resultSet.getInt("idUsuario"));
-                usuario.setNombreUsuario(resultSet.getString("nombreUsuario"));
-                usuario.setClave(resultSet.getString("clave"));
+                usuario.setNombre(resultSet.getString("nombre"));
+                usuario.setEncryptedPassword(resultSet.getString("encryptedPassword"));
 
                 usuarios.add(usuario);
 
@@ -69,8 +69,8 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
             if (resultSet.next()) {
 
                 usuario.setIdUsuario(resultSet.getInt("idUsuario"));
-                usuario.setNombreUsuario(resultSet.getString("nombreUsuario"));
-                usuario.setClave(resultSet.getString("clave"));
+                usuario.setNombre(resultSet.getString("nombre"));
+                usuario.setEncryptedPassword(resultSet.getString("encryptedPassword"));
 
             }
 
@@ -97,8 +97,8 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
             preparedStatement = connection.prepareStatement(insertUsuario);
 
             preparedStatement.setInt(1, usuario.getIdUsuario());
-            preparedStatement.setString(2, usuario.getNombreUsuario());
-            preparedStatement.setString(3, usuario.getClave());
+            preparedStatement.setString(2, usuario.getNombre());
+            preparedStatement.setString(3, usuario.getEncryptedPassword());
             
             preparedStatement.executeUpdate();
 
@@ -122,11 +122,11 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
             PreparedStatement preparedStatement;
 
             String updateUsuario = "UPDATE usuario "
-                    + "SET nombreUsuario = ?, clave = ? WHERE idUsuario = ?";
+                    + "SET nombre = ?, clave = ? WHERE idUsuario = ?";
 
             preparedStatement = connection.prepareStatement(updateUsuario);
-            preparedStatement.setString(1, usuario.getNombreUsuario());
-            preparedStatement.setString(2, usuario.getClave());
+            preparedStatement.setString(1, usuario.getNombre());
+            preparedStatement.setString(2, usuario.getEncryptedPassword());
             
             preparedStatement.setInt(3, usuario.getIdUsuario());
             
@@ -188,8 +188,8 @@ public class UsuarioDAOImplJDBC implements UsuarioDAO {
                 Usuario usuario = new Usuario();
 
                 usuario.setIdUsuario(resultSet.getInt("idUsuario"));
-                usuario.setNombreUsuario(resultSet.getString("nombreUsuario"));
-                usuario.setClave(resultSet.getString("clave"));
+                usuario.setNombre(resultSet.getString("nombre"));
+                usuario.setEncryptedPassword(resultSet.getString("encryptedPassword"));
 
                 usuarios.add(usuario);
 
