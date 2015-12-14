@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.fpmislata.banco.business.domain;
+package com.fpmislata.banco.persistence.dao.impl.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.boot.registry.internal.StandardServiceRegistryImpl;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.context.internal.ThreadLocalSessionContext;
@@ -27,11 +28,11 @@ public class HibernateUtil {
     
     public static void buildSessionFactory() {
         if (sessionFactory == null) {
-              Configuration configuration = new Configuration();
-              configuration.configure();
-              configuration.setProperty("hibernate.current_session_context_class", "thread");
-//              StandardServiceRegistry serviceRegistry = new StandardServiceRegistry().applySettings(configuration.getProperties()).buildServiceRegistry();
-//              sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            Configuration configuration = new Configuration();
+            configuration.configure();
+            configuration.setProperty("hibernate.current_session_context_class", "thread");
+            ServiceRegistry standardServiceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+            sessionFactory = configuration.buildSessionFactory(standardServiceRegistry);
         }
     }
     
